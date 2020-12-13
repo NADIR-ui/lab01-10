@@ -1,0 +1,20 @@
+3- gcc -E max.c testmax.c -o max.i testmax.i ( Etape de Préprocesseur file.c => file.i (texte))
+gcc -S max.c testmax.c ( Génération du fichier assembleur (texte))
+gcc -c max.c testmax.c (Génération du fichier binaire .o)
+
+od -x max.o( affiche le code en hexa)
+
+4-La liste des fichiers intermédiares:
+
+file.c => file.i ( Préprocesseur) gcc -E max.c testmax.c -o max.i testmax.i (affiches le fichier.c)
+
+==> Etape compilation:
+
+
+file.c ou file.i (fichier source post-processé)=> file.s(assembleur texte) => file.o(fichier binaire) 
+gcc -S max.c testmax.c (fichier assembleur)
+gcc -S max.S testmax.S ( fichier binaire)
+
+L'étape finale est l'édition de lien qui permet de combiner des portions de code binaire provenant de fichiers différents 
+
+5- La fonction max est remplacée par le fichier binaire au niveau de l'étape de l'édition de lien.

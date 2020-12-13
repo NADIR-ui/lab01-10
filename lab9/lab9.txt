@@ -1,0 +1,88 @@
+1/  cp max.* min.* var.* main.c -t ../lab9 (copie des fichiers)
+
+2/ Compilation des fichiers .c en utilisant -fPIC:
+
+gcc -fPIC -c max.c min.c var.c ( on obtient des fichiers .o)
+
+3/ Création de la bibio partagée:
+gcc -shared *.o -o libmmv.so
+
+
+4/ Déplacer la bibio vers /opt/lib
+
+sudo mv libmmv.so /opt/lib/
+
+5/ Compilation du main.c:
+
+gcc main.c -L/opt/lib -lmmv 
+
+6/ Exécution:
+
+Erreur: car les fonctions ne son pas reconnue.
+
+7/ variable d'environement:
+
+echo $LD_LIBRARY_PATH ( la variable est vide)
+
+8/ Ajout du chemin  de la bibio à notre variable :
+export LD_LIBRARY_PATH=/opt/lib
+
+Vérification :
+echo $LD_LIBRARY_PATH
+/opt/lib ( notre variable contient bien le chemin de notre bibio)
+
+9/ Compilation et exécution :
+gcc main.c -L/opt/lib -lmmv 
+./a.out
+le programme marche très bien, par contre si on ferme le terminal ça ne fonctionne plus.
+
+10/ ajouter le chemin de notre bibio d'une façon permanente dans le la variable path:
+on doit ajouter la commande export LD_LIBRARY_PATH="/opt/lib" dans le bashrc
+
+cd
+vim .bashrc
+export LD_LIBRARY_PATH="/opt/lib"
+
+
+
+11/ Localisation de la bibliothèque :
+locate libm-
+
+12/le nom reel : libm-2.27.so et libm-2.23.so
+    le soname   :libm.so.6 (version 1)
+
+13/
+sudo mv /opt/lib/libmmv.so /usr/lib (deplacer la bibio vers usr)
+chmod 444 libmmv.so ( lecture seulment)
+
+14/Mettez  à  jour  le  chargeur la  cache  du  ld.so via  la  commande  ldconfig  pour  que  votre 
+bibliothèque soit prête à l’utilisation.
+
+sudo ldconfig
+
+
+15/
+ldconfig -p | grep libmmv (grep pour allez directement vers notre bibio)
+on trouve bien notre bibliotheque : libmmv.so (libc6,x86-64) => /usr/lib/libmmv.so
+
+16/
+ldd a.out 
+	
+libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f4aca55f000)
+
+17/ on supprime la fonction export dans le bashrc
+cd
+vim .bashrc
+
+18/ compilation du main.c:
+gcc main.c -lmmv
+./a.out 
+ le maximun est: 30
+ le minimun est: 0
+ la variance du tableau est: 55.76
+
+
+
+
+
+

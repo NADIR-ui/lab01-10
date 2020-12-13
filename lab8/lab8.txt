@@ -1,0 +1,111 @@
+lab8:
+
+1/ copie des fichiers :
+cd lab7
+cp min.c max.c max.h min.h -t ../lab8
+
+2/ compilation des fichiers max.c min.c sans éditions des liens:(que l'objet .o)
+
+gcc -c max.c
+gcc -c min.c
+
+3/
+Création d'une bibio statique
+
+ar -cru liboutils.a max.o min.o 
+
+4/ la liste des fichier objet dans la bibio:
+
+ar -t liboutils.a
+max.o
+min.o
+
+5/ génération d'un index:
+
+ranlib liboutils.a
+ranlib permet de creer un index des resources présentes dans une bibio statique. ce dernier permet d'accélerer l'édition des liens.
+
+6/  création de la fonction main.c 
+
+touch main.c (programme voir fichier)
+ (compilation génération du fichier a.out)
+
+excécution:
+./a.out 
+
+ le maximun est: 19
+ le minimum est: 5
+
+7/ Création de 2 répertoires lib et include:
+cd /opt
+sudo mkdir lib include 
+
+8/déplacer avec la commande mv :
+cd lab8
+sudo mv min.h max.h /opt/include
+sudo mv liboutils.a /opt/lib
+
+9/ suppression :
+cd lab8
+rm max.c min.c max.o min.o
+gcc main.c -L/opt/lib -I/opt/include -loutils -o executable  (génération de l'exécutable)
+
+10/ le programme marche très bien
+
+./executable 
+le maximun est: 19
+le minimum est: 5
+
+11/ Nous souhaitons rajouter dans la bibliothèque liboutils.a une nouvelle fonction arithmétique var
+cp var.c ../lab8
+gcc -c var.c ( genération du var.o)
+ar -cru liboutils.a var.o ( mettre var.o dans la bibio)
+
+12/ Vérification:
+ar -t liboutils.a
+var.o
+max.o
+min.o
+
+13/ mise à jour de l'index:
+ranlib liboutils.a
+nm liboutils.a
+
+14/ gcc main.c -L/opt/lib -I/opt/include -loutils -o executable ( génération du fichier exécutable du main)
+
+./executable (exxécution du programme)
+
+15/
+
+#include<math.h>
+#include<stdlib.h>
+
+
+
+printf("l'arrondie superieur de la variance = %g\n", ceil(varr));
+printf("l'arrondie inferieur de la variance = %g\n", floor(varr));
+
+gcc main.c -L/opt/lib -I/opt/include -lm -loutils -o executable (appeler la bibiothèque math avec -lm)
+
+
+16/ ./executable 
+
+max = 19
+min = 1
+var = 34.816326
+l'arrondie superieur de la variance = 35.000000
+l'arrondie inferieur de la variance = 34.000000
+
+
+
+
+
+
+
+
+
+
+
+
+
+

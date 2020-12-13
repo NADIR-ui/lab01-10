@@ -1,0 +1,98 @@
+lab3:
+
+1/
+2/
+3/ git clone https://github.com/khachicha/5AS05-partie3.git ( appel au dossier du lab3 en faisant appel à la commande clone)
+
+4/-affichage la liste des fichiers:
+cd 5AS05-partie3/
+ls -lrt (pour les fichiers ils donnent la tailles exactes occuper)
+
+Il existe dans 5AS05-partie3/ :
+
+1 répertoire :sardar ( contient 3fichier texte: sardar1.txt sardar2.txt sardar3.txt) => taille  4096 bits
+
+3 fichier :README.md =>24 bits, Microsoft=>34359 bits,answering-machine.txt=>70408 bits
+
+5/- la taille du répertoire sardar est correcte, car ce répertoire on le considère comme un fichier(sous linux) qui décrit le contenu de ce dernier.
+
+6- cd .. (revenir en arrière)
+du Microsoft => 36 kbits
+R/ on remarque que les tailles sont différentes car ls -lrt donne la taille exacte par contre du -h Microsoft donne la taille accuper sur le disque (car le disque est divisé en secteur de 4k)
+
+
+
+ 7- stat Microsoft (pour chaque fichier texte on a un fichier inode qui contient des infos par rapport à ce fichier) dans le cas du fichier Microsoft on : 
+
+Blocks: 72 
+Inode: 1063715 ( numéro de Inode associé au fichier Microsoft)
+La date et l'heure à laquelle le contenu du fichier a été lu
+La date et l'heure à laquelle le contenu du fichier a été modifié
+La date et l'heure à laquelle les permissions sur ce fichier ont été modifiés
+
+8- fichier caché:
+ls -a
+il existe 2 fichiers caché:
+
+.git  .lightbulb
+
+9-les fichiers du plus anciens au plus récents
+ls -lart
+le contraire:ls -lat
+
+10- Affichage de la tailles du plus petits au plus grand:
+ls -lSr
+11- Afficher le contenu du fichier:
+
+cat answering-machine.txt
+
+12- less answering-machine.txt ( pour afficher des parties du textes )
+
+13- sudo apt install vim ( installation de vim)
+
+14-vim answering-machine.txt 
+i Welcome systemes communicants
+ZZ (sauvgarder et quitter)
+
+15- vim answering-machine.txt 
+/gravelly (recherche du mot)
+dw (suppression du mot courant)
+
+16- ZZ (SAUVEGARDE DU FICHIER)
+
+17- vim answering-machine.txt 
+/planet
+n
+19- ?BEEP
+n
+
+20-tail -20 sardar3.txt
+21- grep 'trust' Microsoft
+22- grep -r 'money'
+23- grep -ri 'money'
+24- mv .lightbulb lightbulb
+25- cd sardar/
+26- mv sardar3.txt ..
+27- cd ..
+28- rm Microsoft
+29- mkdir archive
+cp -r ./* ./archive
+30- ln -s ./sardar/sardar1.txt ./sardar1-sym
+    ln -s ./sardar/sardar2.txt ./sardar2-sym
+31- ls
+les liens symboliques sont en bleu ciel
+32- rm ./sardar/sardar2.txt
+
+la suuprisson du fichier source implique que le lien symbolique devient rouge et on peut plus y accéder
+
+33- On a le droit d'écriture ( je pense qu'il est mal configuré car le but était de ne pas avoir le droit puis modifier!!!)
+
+34- ls -l (affichage des droits d'acces)
+35- chmod 666 sardar1.txt ( droits de lire et écrire pour l'utilsateur les membres du groupes ainsi que les autres)
+36- tar jcvf 5AS05-partie3.tar.bz2 ./5AS05-partie3/ ( archive compresser)
+37- tar jtvf 5AS05-partie3.tar.bz2 
+
+
+
+
+

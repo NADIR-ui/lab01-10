@@ -1,0 +1,81 @@
+lab4 :
+
+1- git clone  https://github.com/khachicha/5AS05-partie4.git
+2- history ( l'historique des commandes)
+3- history > history.txt ( mettre l'historique dans un fichier)
+4- cat sardar1.txt sardar2.txt sardar3.txt >sardar_power.txt ( copier tous les fichiers dans un seul fichiers)
+5- wc -lwm sardar_power.txt (nmbre de lignes, mots et caractères dans un fichiers)
+6- grep -ri 'singh' (afficher l'occurance d'un mot sans prendre en considération MAJ ou MINI)
+7- rm sardar_power.txt
+8- grep -ri 'singh'
+9- grep -ri 'singh' | wc -l (nmbres de lignes)
+123
+grep -ri 'singh' | wc (lwm)
+    123    1553    9931
+
+10- grep -ri 'singh'|grep -ri 'santa' | wc -l (contient 'singh' et 'santa' à la fois)
+114
+
+11- cat *.txt | grep -i singh | grep -i santa | grep -iv banta | wc -l
+26
+
+12-  find . -name "*.txt" -print ( recherche de tous les fichiers .txt)
+./history.txt
+./answering-machine.txt
+./sardar/sardar3.txt
+./sardar/sardar1.txt
+./sardar/sardar2.txt
+
+
+ls *.txt ( recherche de tous les fichiers .txt)
+answering-machine.txt  history.txt ( il n'affiche pas les sous répertoires)cd
+
+13- cp answering-machine.txt test-commande-locate (copier d'un fichier vers un autre nb: il va creer directement le nouveau)
+locate test-commande-locate ( n'affiche pas le chemin)
+
+14- sudo updatedb
+locate "test-commande-locate"
+/home/student/5AS05-partie4/test-commande-locate
+ 
+15- diff noyau.v1 noyau.v2
+25,26c25,26
+< PATCHLEVEL = 01
+< SUBLEVEL = -rc1
+---
+> PATCHLEVEL = 02
+> SUBLEVEL = -rc2
+54c54
+< export	SHELL CC GCC
+---
+> export	SHELL 
+
+la ligne 25 & 26 sont diffréntes dans les deux fichiers PATCHLEVEL = 01
+< SUBLEVEL = -rc1 (noyau.v1)
+---
+> PATCHLEVEL = 02
+> SUBLEVEL = -rc2 ( noyau.v2)
+aussi pour la ligne 54
+
+NB: pour dire que les deux fichiers sont différents ctt:
+diff -q noyau.v1 noyau.v2
+il affiche :
+Files noyau.v1 and noyau.v2 differ
+
+afficher la différence au format se dortie cote à cote:
+diff -y noyau.v1 noyau.v2
+
+16- diff noyau.v1 noyau.v2 > update.patch (création d'un nouveau fichier qui contient la différence)
+patch noyau.v1 update.patch
+
+Vérification : diff -q noyau.v1 noyau.v2 (n'afficher rien donc les deux fichiers sont identiques)
+
+
+
+
+
+
+
+
+
+
+

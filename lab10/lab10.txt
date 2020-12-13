@@ -1,0 +1,203 @@
+1/ copier des fichiers du lab7 vers lab10:
+
+cp min.* max.* var.* test.c ../lab10
+
+2/
+echo makefile
+
+-Wall: pour afficher les warnings.
+
+install: My-binaire
+        mv My-binaire /home/nadir
+
+My-binaire: test.o max.o min.o var.o
+        gcc -Wall max.o min.o var.o test.o -o My-binaire
+
+max.o : max.c
+        gcc -Wall -c max.c -o max.o
+min.o : min.c
+        gcc -Wall -c min.c -o min.o
+var.o : var.c
+        gcc -Wall -c varc.c -o var.o
+test.o : test.c
+        gcc -Wall -c test.c -o test.o
+
+clean:  
+        rv max.o min.o var.o test.o
+
+3/ Exécution des instructions :
+make (exécute la première ligne ainsi que les fichiers qui dépendent d'elle)
+gcc -Wall -c max.c -o max.o 
+gcc -Wall -c min.c -o min.o
+gcc -Wall -c var.c -o var.o
+gcc -Wall test.o max.o min.o var.o -o My_binaire
+
+make install ( il la refait car on a mv pas de gcc (remarque constaté)).
+gcc -Wall max.o min.o var.o test.o -o My-binaire
+mv My-binaire /home/nadir
+
+make min.o (make: 'min.o' is up to date.) car l'étape est déja faite avec la commande make.
+
+make clean (rm  max.o min.o var.o test.o). ( supprime fichier.o donc il faudra recompiler)
+rm  max.o min.o var.o test.o
+
+4/ 
+
+#déclaration de variable
+
+
+CC = gcc
+OBJ = max.o min.o var.o test.o
+CC_OPTIONS =
+
+install: My-binaire
+        mv My-binaire /home/nadir
+
+My-binaire: test.o ${OBJ}
+        ${CC} -Wall ${OBJ} -o My-binaire
+
+max.o : max.c
+        ${CC} -Wall -c max.c -o max.o
+min.o : min.c
+        ${CC} -Wall -c min.c -o min.o
+var.o : var.c
+        ${CC} -Wall -c var.c -o var.o
+test.o : test.c
+        ${CC} -Wall -c test.c -o test.o
+
+clean:  
+        rm ${OBJ}
+
+5/
+#déclaration de variable
+
+CC = gcc
+OBJ = max.o min.o var.o test.o
+CC_OPTIONS = -g -Wall
+
+install: My-binaire
+        mv My-binaire /home/nadir
+
+My-binaire:  ${OBJ}
+        ${CC} ${CC_OPTIONS} ${OBJ} -o My-binaire
+
+max.o : max.c
+        ${CC} ${CC_OPTIONS} -c max.c -o max.o
+min.o : min.c
+        ${CC} ${CC_OPTIONS} -c min.c -o min.o
+var.o : var.c
+        ${CC} ${CC_OPTIONS} -c var.c -o var.o
+test.o : test.c
+        ${CC} ${CC_OPTIONS} -c test.c -o test.o
+
+clean:  
+        rm ${OBJ}
+
+le programme fonctionne correctement.
+
+6/
+#déclaration de variable
+
+CC = gcc
+OBJ = max.o min.o var.o test.o
+CC_OPTIONS = -g -Wall
+
+install: My-binaire
+        mv $^ /home/nadir
+
+My-binaire:  ${OBJ}
+        ${CC} ${CC_OPTIONS} ${OBJ} -o $@
+
+max.o : max.c
+        ${CC} ${CC_OPTIONS} -c $^ -o $@
+min.o : min.c
+        ${CC} ${CC_OPTIONS} -c $^ -o $@
+var.o : var.c
+        ${CC} ${CC_OPTIONS} -c $^ -o $@
+test.o : test.c
+        ${CC} ${CC_OPTIONS} -c $^ -o $@
+
+clean:  
+        rm ${OBJ}
+
+7/
+
+#déclaration de variable
+
+CC = gcc
+OBJ = max.o min.o var.o test.o
+ifeq ($(DEBUG),yes)
+
+        CC_OPTIONS= -g -Wall
+else
+        CC_OPTIONS= -Wall
+endif
+
+
+install: My-binaire
+        mv $^ /home/nadir
+
+My-binaire:  ${OBJ}
+        ${CC} ${CC_OPTIONS} ${OBJ} -o $@
+
+max.o : max.c
+        ${CC} ${CC_OPTIONS} -c $^ -o $@
+min.o : min.c
+        ${CC} ${CC_OPTIONS} -c $^ -o $@
+var.o : var.c
+
+8/ Tester le bon fonctionnement:
+
+make DEBUG=yes
+gcc -g -Wall max.o min.o var.o test.o -o My-binaire
+mv My-binaire /home/nadir
+
+make DEBUG=1
+gcc -Wall  max.o min.o var.o test.o -o My-binaire
+mv My-binaire /home/nadir
+
+9/ mode debug et mode release:
+
+#déclaration de variable
+
+CC = gcc
+OBJ = max.o min.o var.o test.o
+ifeq ($(DEBUG),yes)
+
+        CC_OPTIONS= -g -Wall
+else
+        CC_OPTIONS=
+endif
+
+
+install: My-binaire
+        mv $^ /home/nadir
+
+My-binaire:  ${OBJ}
+        ${CC} ${CC_OPTIONS} ${OBJ} -o $@
+ifeq ($(DEBUG),yes)
+        @echo "DEBUG MODE"
+else
+        @echo "RELEASE MODE"
+endif
+
+Vérification:
+a/
+make DEBUG=yes
+gcc -g -Wall max.o min.o var.o test.o -o My-binaire
+DEBUG MODE
+mv My-binaire /home/nadir
+
+b/
+make DEBUG=1
+gcc  max.o min.o var.o test.o -o My-binaire
+RELEASE MODE
+mv My-binaire /home/nadir
+
+
+
+
+
+
+
+

@@ -1,0 +1,61 @@
+Lab2 : GIT :
+
+1-Installation des gits packages :
+
+sudo apt install git gitk git-email
+
+2-Git configuration :
+
+git config --global user.name nadir
+
+git config --global user.email djafarnadir@gmail.com
+
+Vérification  des informations :
+
+git config --global user.name 
+
+git config --global user.email 
+
+Partie 2 :
+1-
+mkdir lab2
+
+pour vérifier : ls
+
+cd lab2
+2-
+touch DJAFAR.txt
+cat > DJAFAR.txt
+hello M2 syscom
+
+Vérifier sur le fichier:
+cat DJAFAR.txt
+
+cd.. (revenir en arrière)
+cd Desktop/
+touch commandelab2.txt ( créér un fichier pour les commande)
+
+3-cd ..(revenir en arrière)
+cd lab2
+git init
+
+4-git statuts (l'état du fichiet test)
+5- git add DJAFAR.txt et git status
+6- git commit -m Bonjour
+7- création du compte
+8- git remote add origin https://github.com/NADIR-ui/Lab2.git
+git branch -M master
+git push -u origin master
+
+9-création du fichier et message
+10-git pull (mettre à jour le répertoire)
+11- cd Desktop/
+git clone https://github.com/NADIR-ui/Lab2.git
+
+
+
+
+
+
+
+

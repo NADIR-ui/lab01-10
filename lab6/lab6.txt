@@ -1,0 +1,54 @@
+lab 6:
+
+1- affichage des variables d'environnements:
+env
+
+la valeur de la variable d'environnement HOME:
+env |grep HOME
+HOME=/home/student
+
+ou bien la commande:
+$HOME
+
+2- lA valeur de la variable d'environnement PATH:
+$PATH ou env |grep PATH
+
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+
+Chemin de recherche des commandes, ces chemins permettent d'exécuter directement une commande dans le terminal
+
+3- ps -aux #affiche tous les process en cours d'exécution
+
+4- # Déplacer le script process.sh vers /opt
+sudo mv process.sh /opt
+#vérification 
+cd /opt
+ls
+process.sh
+
+5- Ajout de la commande nécessaire pour exécuter le script de n'importe quel endroit:
+
+export PATH=$PATH:/opt #ajout de /opt dans des chemin de recherche PATH
+#Vérification
+$PATH
+bash: /home/student/process:/home/student/process.sh:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/opt:
+
+exécuter:
+process.sh
+
+6- process.sh # le script ne s'exécute plus
+
+7- le fichier script qui s'éxécute automatiquement est le ".bashrc"
+8- ls -a # afficher tous les dossiers
+
+vim .bashrc # le fichier qui s'éxécute automatiquement lors du lancement du terminal
+
+Ajout de la commande:
+export PATH=$PATH:/opt
+fermer le terminal puis relancer:
+process.sh
+
+
+
+               
+
